@@ -1,5 +1,2 @@
 # 0.2eM-etyB
-This is the read me file of the Byte Me 2.0 group
-Dimesion block 32x32 px
-Dimesino maze 30x30 blocks
-hi
+The game is 960 x 960 (There will be 30 blocks where every block is 32 x 32 pixels)
