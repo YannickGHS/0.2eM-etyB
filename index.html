@@ -1,0 +1,47 @@
+<html>
+
+    <head>
+
+        <title>Byte Me 2.0</title>
+
+    </head>
+
+    <body>
+
+        <canvas id="myCanvas" width="960" height="960" style="border:1px solid #d3d3d3;"></canvas>
+
+        <button type="button" onclick="displayWelcome()">Start</button>
+
+    </body>
+
+    <script>
+
+        // Get canvas element from html document
+
+        var canvas = document.getElementById("myCanvas");
+
+        var ctx = canvas.getContext("2d");
+
+       
+
+        function displayWelcome() {
+
+            // Draw line
+
+            ctx.moveTo(200, 120);
+
+            ctx.lineTo(360, 120);
+
+            ctx.stroke();
+
+            // Draw text
+
+            ctx.font = "30px Arial";
+
+            ctx.fillText("Hello World!", 200, 100);
+
+        }
+
+    </script>
+
+</html>
