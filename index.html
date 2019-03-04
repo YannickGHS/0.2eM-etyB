@@ -6,11 +6,25 @@
 
     </head>
 
+	<style>
+		#startButton {
+			position: absolute;
+			top: 450px;
+			left: 350px;
+			width: 200px;
+			height: 50px;
+			font-size: 20px;
+		}
+	
+	
+	
+	</style>
     <body>
 
         <canvas id="myCanvas" width="900" height="900" style="border:1px solid #d3d3d3;"></canvas>
+		
+		<button type = "button" onclick="startGame()" id="startButton">Start</button>
 
-        <!--<button type="button" onclick="displayWelcome()">Start</button>--->
 
     </body>
 
@@ -30,8 +44,16 @@
 		var rightPressed = false;
 		var leftPressed = false;
 		
+		var startButton = document.getElementById('startButton')
+		
+		
 		document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 		document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
+		
+		function startGame() {
+			startButton.style.display = 'none'
+			setInterval(frame, 10)
+		}
 		
 		function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
 			if(e.key=="ArrowRight") {
@@ -91,11 +113,8 @@
 			}
 		}
 		
-		
-		setInterval(frame, 10)
-		// the draw function will be called every 10 miliseconds forever
+		// the function will be called every 10 miliseconds forever
 
     </script>
 
 </html>
-<!--file:///C:/Users/SSA/Desktop/Sajid/Hackathon/0.2eM-etyB-master/index.html-->
