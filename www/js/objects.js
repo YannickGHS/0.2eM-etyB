@@ -22,7 +22,15 @@ class Sprite { //base visual element of the game
 }
 
 class Tile extends Sprite{ //core maze graphical and functional component
-
+    constructor(x, y, type){
+        let imagePath;
+        switch(type){
+            case 0: imagePath = ¨¨; //enter the path of the image
+                brake;
+            default: imagePath = ¨www\img\placeholder.png¨;
+                brake;
+        }
+    }
 }
 
 //class Player extends Sprite
