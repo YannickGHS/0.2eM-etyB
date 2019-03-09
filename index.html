@@ -21,100 +21,13 @@
 	</style>
     <body>
 
-        <canvas id="myCanvas" width="900" height="900" style="border:1px solid #d3d3d3;"></canvas>
+        <canvas id="myCanvas" width= "320" height= "320" style="border:1px solid #d3d3d3;"></canvas>
 		
 		<button type = "button" onclick="startGame()" id="startButton">Start</button>
 
 
-    </body>
-
-    <script>
-
-        // Get canvas element from html document
-
-        var canvas = document.getElementById("myCanvas");
-
-        var ctx = canvas.getContext("2d");
-		var rectX = 50;
-		var rectY = 50;
-		var rectSize = 30;
-		
-		var upPressed = false;
-		var downPressed = false;
-		var rightPressed = false;
-		var leftPressed = false;
-		
-		var startButton = document.getElementById('startButton')
-		
-		
-		document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
-		document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
-		
-		function startGame() {
-			startButton.style.display = 'none'
-			setInterval(frame, 10)
-		}
-		
-		function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
-			if(e.key=="ArrowRight") {
-				rightPressed = true;
-			}
-			else if(e.key=="ArrowLeft") {
-				leftPressed = true;
-			}
-			else if(e.key=="ArrowUp") {
-				upPressed = true;
-			}
-			else if(e.key=="ArrowDown") {
-				downPressed = true;
-			}
-		}
-
-		function keyUpListener(e) {
-			if(e.key=="ArrowRight") {
-				rightPressed = false;
-			}
-			else if(e.key=="ArrowLeft") {
-				leftPressed = false;
-			}
-			else if(e.key=="ArrowUp") {
-				upPressed = false;
-			}
-			else if(e.key=="ArrowDown") {
-				downPressed = false;
-			}
-		}
-		
-		
-		function player () {
-			ctx.beginPath();
-			ctx.rect(rectX, rectY, rectSize, rectSize);
-			ctx.fillStyle = "#000000";
-			ctx.fill();
-			ctx.closePath();
-		}
-		
-		function frame() {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			player();
-			
-			// Checks if the variable before moving player
-			if(rightPressed && rectX < canvas.width - 30) {
-				rectX = rectX + 4;
-			}
-			if(leftPressed && rectX > 0) {
-				rectX = rectX - 4;
-			}
-			if(upPressed && rectY > 0) {
-				rectY = rectY - 4;
-			}
-			if(downPressed && rectY < canvas.height - 30) {
-				rectY = rectY + 4;
-			}
-		}
-		
-		// the function will be called every 10 miliseconds forever
-
-    </script>
+	</body>
+	<script src = "www/js/objects.js"></script>
+    <script src = "www/js/main.js"></script>
 
 </html>
