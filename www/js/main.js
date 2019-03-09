@@ -22,15 +22,19 @@ var leftPressed = false;
 var startButton = document.getElementById('startButton')
 
 var map1 = [
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ];
 
 var tileMap;
-
 
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
@@ -38,6 +42,15 @@ document.addEventListener("keyup",keyUpListener,false); //These the other listen
 function loadMap(){
     tileMap = new Array(map1.length);
     tileMap = twoDArray(tileMap, map1.length);
+    Array.prototype.display = function(){
+        for(i = 0; i < this.length; i++)
+            for(j = 0; j < this[i].length; j++)
+                this[i][j].show();
+    }
+
+    for(i = 0; i < tileMap.length; i++)
+        for(j = 0; j < tileMap[i].length; j++)
+            tileMap[i][j] = new Tile(32 * i, 32 * j, map1[i][j]);
     
 }
 
@@ -49,6 +62,7 @@ function twoDArray(temp, x){ //generates a 2D array
 
 function startGame() {
     startButton.style.display = 'none'
+    loadMap();
     setInterval(frame, 10)
 }
 
@@ -93,7 +107,7 @@ function player () {
 
 function frame() { // the function will be called every 10 miliseconds forever
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //here a 2D array of Tile objects will be traversed
+    tileMap.display();//here a 2D array of Tile objects will be traversed
     player();
     
     // Checks if the variable before moving player
@@ -110,7 +124,3 @@ function frame() { // the function will be called every 10 miliseconds forever
         rectY = rectY + 4;
     }
 }
-
-
-
-
