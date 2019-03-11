@@ -11,13 +11,14 @@ class Sprite { //base visual element of the game
     constructor(x, y, imgPath) {
         this.x = x; //x position
         this.y = y; //y position
-        var w = 32; //width
-        var h = 32; //height
-        var img = document.createElement("img"); //image object
-        img.src = imgPath;
-        this.show = function () {
-            ctx.drawImage(img, x, y, w, h);
-        };
+        this.w = 32; //width
+        this.h = 32; //height
+        this.img = document.createElement("img"); //image object
+        this.img.src = imgPath;
+    }
+
+    show(){
+        ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     }
 }
 
@@ -33,4 +34,9 @@ class Tile extends Sprite{ //core maze graphical and functional component
     }
 }
 
-//class Player extends Sprite
+class Player extends Sprite{//class Player extends Sprite
+    constructor(x, y){
+        super(x, y, "www/img/placeholder.png");
+        
+    }
+}
