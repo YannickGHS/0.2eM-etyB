@@ -11,6 +11,11 @@ var canvas = document.getElementById("myCanvas"); // Get canvas element from htm
 
 var ctx = canvas.getContext("2d");
 
+var gameMusic = new Audio('www/sound/placeholder_music.mp3');
+gameMusic.volume = 0.05;
+var enterClick = new Audio('www/sound/enter.wav');
+enterClick.volume = 0.2;
+
 var upPressed = false;
 var downPressed = false;
 var rightPressed = false;
@@ -26,6 +31,8 @@ document.addEventListener("keydown",keyDownListener,false); //These are listener
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
 function startGame() {
+    enterClick.play();
+    gameMusic.play();
     startButton.style.display = 'none'
     loadMap();
     setInterval(frame, 10);
@@ -66,17 +73,16 @@ function frame() { // the function will be called every 10 miliseconds forever
     tileMap.display();//here a 2D array of Tile objects will be traversed
     // Checks if the variable before moving player
     if(rightPressed && player.x < canvas.width - 30) {
-        player.x = player.x + 4;
+        player.x = player.x + 2;
     }
     if(leftPressed && player.x > 0) {
-        player.x = player.x - 4;
+        player.x = player.x - 2;
     }
     if(upPressed && player.y > 0) {
-        player.y = player.y - 4;
+        player.y = player.y - 2;
     }
     if(downPressed && player.y < canvas.height - 30) {
-        player.y = player.y + 4;
+        player.y = player.y + 2;
     }
-    console.log(player.x);
     player.show();
 }

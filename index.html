@@ -18,26 +18,36 @@
 	<style>
 		#startButton {
 			position: absolute;
-			top: 450px;
-			left: 350px;
+			top: 200px;
+			left: 150px;
 			width: 200px;
 			height: 50px;
 			font-size: 20px;
 		}
-	
-	
-	
+
+  .button {
+    -webkit-transition-duration: 1s;
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+  }
+
+  .button:hover {
+    background-color: #555555;
+    color: white;
+  }
+
 	</style>
     <body>
 
-        <canvas id="myCanvas" width= "320" height= "320" style="border:1px solid #d3d3d3;"></canvas>
-		
-		<button type = "button" onclick="startGame()" id="startButton">Start</button>
+        <canvas id="myCanvas" width= "480" height= "480" style="border:1px solid #d3d3d3;"></canvas>
+
+		<button class="button button" type = "button" onclick="startGame()" id="startButton">Start</button>
 
 
 	</body>
 	<script src = "www/js/Map.js"></script>
 	<script src = "www/js/objects.js"></script>
-    <script src = "www/js/main.js"></script>
+  <script src = "www/js/main.js"></script>
 
 </html>
