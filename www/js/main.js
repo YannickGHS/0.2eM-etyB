@@ -20,7 +20,7 @@ var startButton = document.getElementById('startButton')
 
 var tileMap; //current map displayed
 
-var player = new Player(10, 10);
+var player = new Player(64, 64);
 
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
@@ -62,6 +62,8 @@ function keyUpListener(e) {
 }
 
 function frame() { // the function will be called every 10 miliseconds forever
+    let tempX = player.x;
+    let tempY = player.y;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     tileMap.display();//here a 2D array of Tile objects will be traversed
     // Checks if the variable before moving player
@@ -77,6 +79,10 @@ function frame() { // the function will be called every 10 miliseconds forever
     if(downPressed && player.y < canvas.height - 30) {
         player.y = player.y + 4;
     }
-    console.log(player.x);
+    if(tileMap.collisionCheck(player)){
+        player.x = tempX;
+        player.y = tempY;
+    }
     player.show();
+    console.log(tileMap.collisionCheck(player));
 }

@@ -24,13 +24,25 @@ class Sprite { //base visual element of the game
 
 class Tile extends Sprite{ //core maze graphical and functional component
     constructor(x, y, imgTag){
-        var imgPath;
+        let imgPath;
+        let _collision;
         switch(imgTag){
             case 0: imgPath = "www/img/tilesets/grass.png";
-            break;
+                    _collision = false;
+                    break;
+            case 1: imgPath = "www/img/tilesets/grass.png";
+                    _collision = true;
+                    break;
             default: imgPath = "www/img/placeholder.png";
         }
         super(x, y, imgPath);
+        this.collision = _collision;
+    }
+
+    isColliding(other){
+        let isColliding = other.x >= this.x && other.x <= this.x + this.w;
+        isColliding = isColliding && other.y >= this.y && other.y <= this.y +this.h;
+        return isColliding && this.collision;
     }
 }
 
