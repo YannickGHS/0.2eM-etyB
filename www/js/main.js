@@ -27,8 +27,20 @@ var tileMap; //current map displayed
 
 var player = new Player(10, 10);
 
+var img = new Image();
+img.onload= menuDraw;
+img.src = "www/img/menu.png";
+
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
+
+window.onload=menuDraw();
+
+function menuDraw() {
+    ctx.drawImage(img, 0, 0);
+}
+
+
 
 function startGame() {
     enterClick.play();
