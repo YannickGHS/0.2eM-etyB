@@ -11,10 +11,16 @@ var canvas = document.getElementById("myCanvas"); // Get canvas element from htm
 
 var ctx = canvas.getContext("2d");
 
+////////////////////////////////////////////////////////////////////
+//SOUND
+
 var gameMusic = new Audio('www/sound/placeholder_music.mp3');
 gameMusic.volume = 0.05;
 var enterClick = new Audio('www/sound/enter.wav');
 enterClick.volume = 0.2;
+
+///////////////////////////////////////////////////////////////////
+//CONTROLS
 
 var upPressed = false;
 var downPressed = false;
@@ -27,22 +33,40 @@ var tileMap; //current map displayed
 
 var player = new Player(10, 10);
 
+///////////////////////////////////////////////////////////////////
+//IMAGES
 var img = new Image();
-img.onload= menuDraw;
-img.src = "www/img/menu.png";
+img.onload= imageLoaded;
+img.src = "www/img/menubackground.png";
+
+var img2 = new Image();
+img2.src = "www/img/menu.png"
+var menuBackgroundMovement = setInterval(menuDraw, 50) //set a variable for the this setInterval for the movement of background so that it can be cleared later
+var imageX = 0
+var imageMovement = -1
+///////////////////////////////////////////////////////////////////
+
 
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
-window.onload=menuDraw();
-
-function menuDraw() {
-    ctx.drawImage(img, 0, 0);
+function imageLoaded() {
+    menuBackgroundMovement //calls the setInterval to start when the image has finally loaded
 }
 
+function menuDraw() {
+    ctx.drawImage(img, imageX, 0);
+    ctx.drawImage(img2, 0, 0);
+    if (imageX == -480) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
+      imageMovement = 1
+    } else if (imageX == 0) {
+      imageMovement = -1
+    }
+    imageX = imageX + imageMovement
+}
 
-
-function startGame() {
+function startGame() { //prepares the game to start
+    clearInterval(menuBackgroundMovement)
     enterClick.play();
     gameMusic.play();
     startButton.style.display = 'none'
