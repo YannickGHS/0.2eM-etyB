@@ -39,7 +39,7 @@ function loadMap(){
 
     for(i = 0; i < tileMap.length; i++)
         for(j = 0; j < tileMap[i].length; j++)
-            tileMap[i][j] = new Tile(32 * i, 32 * j, map1[i][j]);
+            tileMap[i][j] = new Tile(32 * j, 32 * i, map1[i][j]);
     
 }
 

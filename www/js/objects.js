@@ -41,7 +41,7 @@ class Tile extends Sprite{ //core maze graphical and functional component
 
     isColliding(other){
         let isColliding = other.x >= this.x && other.x <= this.x + this.w;
-        isColliding = isColliding && other.y >= this.y && other.y <= this.y +this.h;
+        isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
         return isColliding && this.collision;
     }
 }
