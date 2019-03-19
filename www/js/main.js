@@ -13,6 +13,7 @@ var ctx = canvas.getContext("2d");
 
 ////////////////////////////////////////////////////////////////////
 //SOUND
+var slider = document.getElementById("masterVolume");
 
 var gameMusic = new Audio('www/sound/placeholder_music.mp3');
 gameMusic.volume = 0.05;
@@ -55,6 +56,7 @@ function imageLoaded() {
 }
 
 function menuDraw() {
+    var volume = slider.value //gets value of volume slider
     ctx.drawImage(img, imageX, 0);
     ctx.drawImage(img2, 0, 0);
     if (imageX == -480) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
@@ -69,6 +71,7 @@ function startGame() { //prepares the game to start
     clearInterval(menuBackgroundMovement)
     enterClick.play();
     gameMusic.play();
+    masterVolume.style.display = 'none'
     startButton.style.display = 'none'
     loadMap();
     setInterval(frame, 10);
