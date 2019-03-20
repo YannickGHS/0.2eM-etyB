@@ -46,7 +46,6 @@ Array.prototype.collisionCheck = function(player){
 function loadMap(){
     tileMap = new Array(map1.length);
     tileMap = twoDArray(tileMap, map1[0].length);
-
     for(i = 0; i < tileMap.length; i++)
         for(j = 0; j < tileMap[i].length; j++)
             tileMap[i][j] = new Tile(32 * j, 32 * i, map1[i][j]);
