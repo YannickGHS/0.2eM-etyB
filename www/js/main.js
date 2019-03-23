@@ -16,10 +16,11 @@ var ctx = canvas.getContext("2d");
 var slider = document.getElementById("masterVolume");
 
 var gameMusic = new Audio('www/sound/placeholder_music.mp3');
-gameMusic.volume = 0.05;
+gameMusic.volume = 0.1;
 var enterClick = new Audio('www/sound/enter.wav');
-enterClick.volume = 0.2;
+enterClick.volume = 0.1;
 
+var oldSound = slider.value;
 ///////////////////////////////////////////////////////////////////
 //CONTROLS
 
@@ -41,10 +42,10 @@ img.onload= imageLoaded;
 img.src = "www/img/menubackground.png";
 
 var img2 = new Image();
-img2.src = "www/img/menu.png"
-var menuBackgroundMovement = setInterval(menuDraw, 50) //set a variable for the this setInterval for the movement of background so that it can be cleared later
-var imageX = 0
-var imageMovement = -1
+img2.src = "www/img/menu.png";
+var menuBackgroundMovement = setInterval(menuDraw, 50); //set a variable for the this setInterval for the movement of background so that it can be cleared later
+var imageX = 0;
+var imageMovement = -1;
 ///////////////////////////////////////////////////////////////////
 
 
@@ -56,13 +57,19 @@ function imageLoaded() {
 }
 
 function menuDraw() {
-    var volume = slider.value //gets value of volume slider
+    var volume = 0.1 - (slider.value / 100); //gets value of volume slider
+    enterClick.volume = 0.1 - volume;
+    gameMusic.volume = 0.1 - volume;
+    if (oldSound != slider.value) { //checks if the value of slider has changed then plays sound
+      enterClick.play();
+      oldSound = slider.value
+    }
     ctx.drawImage(img, imageX, 0);
     ctx.drawImage(img2, 0, 0);
-    if (imageX == -480) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
-      imageMovement = 1
+    if (imageX == -1140) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
+      imageMovement = 0.5
     } else if (imageX == 0) {
-      imageMovement = -1
+      imageMovement = -0.5
     }
     imageX = imageX + imageMovement
 }
