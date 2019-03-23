@@ -33,29 +33,41 @@ class Tile extends Sprite{ //core maze graphical and functional component
             case 1: imgPath = "www/img/tilesets/grass.png";
                     _collision = true;
                     break;
+            case 2: imgPath = "www/img/placeholder.png";
+                    _collision = false;
+                    break;
             default: imgPath = "www/img/placeholder.png";
         }
         super(x, y, imgPath);
         this.collision = _collision;
     }
 
-    isColliding(other){
-        /*  this.x
-            this.y
-            this.x + this.w
-            this. y + this.h
+    isColliding(other, collision){
+        let isColliding;
+        isColliding = other.x >= this.x && other.x <= this.x + this.w;
+        isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
+        isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
+        return isColliding && collision;
+     }
+}
 
-            other.x
-            other.y
-            other.x + other.w
-            other.y + other.h
+class Portal extends Tile{
+    constructor(x, y, newX, newY){
+        super(x, y, 2);
+        this.newX = newX;
+        this.newY = newY;
+    }
 
-        */
-       let isColliding;
-       isColliding = other.x >= this.x && other.x <= this.x + this.w;
-       isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
-       isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
-       return isColliding && this.collision;
+    isColliding(other, collision){
+        let isColliding = super.isColliding(other, true);
+        if(isColliding)
+            this.portal();
+        return collision;
+    }
+
+    portal(){
+        player.x = this.newX;
+        player.y = this.newY;
     }
 }
 

@@ -137,5 +137,4 @@ function frame() { // the function will be called every 10 miliseconds forever
         player.y = tempY;
     }
     player.show();
-    console.log(tileMap.collisionCheck(player));
 }

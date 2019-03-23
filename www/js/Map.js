@@ -13,7 +13,7 @@ var map1 = [ //map 1
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 	[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -39,7 +39,7 @@ Array.prototype.collisionCheck = function(player){
     let result = false;
     for(i = 0; i < this.length; i++)
         for(j = 0; j < this[i].length; j++)
-            result = result || this[i][j].isColliding(player);
+            result = result || this[i][j].isColliding(player, this[i][j].collision);
     return result;
 }
 
@@ -47,8 +47,13 @@ function loadMap(){
     tileMap = new Array(map1.length);
     tileMap = twoDArray(tileMap, map1[0].length);
     for(i = 0; i < tileMap.length; i++)
-        for(j = 0; j < tileMap[i].length; j++)
-            tileMap[i][j] = new Tile(32 * j, 32 * i, map1[i][j]);
+		for(j = 0; j < tileMap[i].length; j++)
+		if(map1[i][j] == 2){
+			tileMap[i][j] = new Portal(32 * j, 32 * i, 320, 320);
+		}
+		else{
+			tileMap[i][j] = new Tile(32 * j, 32 * i, map1[i][j]);
+		}
     
 }
 
