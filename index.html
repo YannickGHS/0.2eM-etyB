@@ -16,28 +16,52 @@
     </head>
 
 	<style>
+    .slidecontainer {
+      width: 370px;
+    }
+
+    .slider {
+      position: absolute;
+      top: 500px;
+      left: 385px;
+      width: 370px;
+      height: 50px;
+    }
+
 		#startButton {
 			position: absolute;
-			top: 450px;
-			left: 350px;
+			top: 300px;
+			left: 475px;
 			width: 200px;
 			height: 50px;
 			font-size: 20px;
 		}
-	
-	
-	
+
+  .button {
+    -webkit-transition-duration: 1s;
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+  }
+
+  .button:hover {
+    background-color: #555555;
+    color: white;
+  }
+
 	</style>
     <body>
 
         <canvas id="myCanvas" width= "1120" height= "640" style="border:1px solid #d3d3d3;"></canvas>
-		
-		<button type = "button" onclick="startGame()" id="startButton">Start</button>
+        <div class="slidecontainer">
+          <input type="range" min="0" max="10" value="5" class="slider" id="masterVolume">
+        </div>
+		<button class="button button" type = "button" onclick="startGame()" id="startButton">Start</button>
 
 
 	</body>
 	<script src = "www/js/Map.js"></script>
 	<script src = "www/js/objects.js"></script>
-    <script src = "www/js/main.js"></script>
+  <script src = "www/js/main.js"></script>
 
 </html>
