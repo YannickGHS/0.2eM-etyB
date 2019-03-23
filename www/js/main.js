@@ -33,7 +33,7 @@ var startButton = document.getElementById('startButton')
 
 var tileMap; //current map displayed
 
-var player = new Player(10, 10);
+var player = new Player(64, 64);
 
 ///////////////////////////////////////////////////////////////////
 //IMAGES
@@ -115,6 +115,8 @@ function keyUpListener(e) {
 }
 
 function frame() { // the function will be called every 10 miliseconds forever
+    let tempX = player.x;
+    let tempY = player.y;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     tileMap.display();//here a 2D array of Tile objects will be traversed
     // Checks if the variable before moving player
@@ -130,5 +132,10 @@ function frame() { // the function will be called every 10 miliseconds forever
     if(downPressed && player.y < canvas.height - 30) {
         player.y = player.y + 2;
     }
+    if(tileMap.collisionCheck(player)){
+        player.x = tempX;
+        player.y = tempY;
+    }
     player.show();
+    console.log(tileMap.collisionCheck(player));
 }
