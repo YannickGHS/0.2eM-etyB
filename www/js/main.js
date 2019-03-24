@@ -48,7 +48,6 @@ var imageX = 0;
 var imageMovement = -1;
 ///////////////////////////////////////////////////////////////////
 
-
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
@@ -122,20 +121,33 @@ function frame() { // the function will be called every 10 miliseconds forever
     // Checks if the variable before moving player
     if(rightPressed && player.x < canvas.width - 30) {
         player.x = player.x + 2;
+        player.img.src = "www/img/SpriteR.png"
     }
     if(leftPressed && player.x > 0) {
         player.x = player.x - 2;
+        player.img.src = "www/img/SpriteL.png"
     }
     if(upPressed && player.y > 0) {
         player.y = player.y - 2;
+        player.img.src = "www/img/SpriteU.png"
     }
     if(downPressed && player.y < canvas.height - 30) {
         player.y = player.y + 2;
+        player.img.src = "www/img/SpriteD.png"
     }
     if(tileMap.collisionCheck(player)){
         player.x = tempX;
         player.y = tempY;
     }
+
+    //draws the circle around the player if you need this disabled comment the section below
+    var gradient = ctx.createRadialGradient(player.x+10, player.y+10, 50, player.x, player.y, 100);
+    gradient.addColorStop(0, 'transparent');
+    gradient.addColorStop(1, 'black');
+    ctx.beginPath();
+    ctx.arc(player.x+10, player.y+10, 1250, 0, 2 * Math.PI);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
     player.show();
-    console.log(tileMap.collisionCheck(player));
 }

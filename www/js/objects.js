@@ -27,13 +27,13 @@ class Tile extends Sprite{ //core maze graphical and functional component
         let imgPath;
         let _collision;
         switch(imgTag){
-            case 0: imgPath = "www/img/tilesets/grass.png";
+            case 0: imgPath = "www/img/tilesets/ground.png";
                     _collision = false;
                     break;
-            case 1: imgPath = "www/img/tilesets/grass.png";
+            case 1: imgPath = "www/img/tilesets/wall.png";
                     _collision = true;
                     break;
-            default: imgPath = "www/img/placeholder.png";
+            default: imgPath = "www/img/SpriteR.png";
         }
         super(x, y, imgPath);
         this.collision = _collision;
@@ -61,7 +61,7 @@ class Tile extends Sprite{ //core maze graphical and functional component
 
 class Player extends Sprite{//class Player extends Sprite
     constructor(x, y){
-        super(x, y, "www/img/placeholder.png");
-        
+        super(x, y, "www/img/SpriteR.png");
+
     }
 }
