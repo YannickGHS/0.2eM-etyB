@@ -48,6 +48,9 @@ var imageX = 0;
 var imageMovement = -1;
 ///////////////////////////////////////////////////////////////////
 
+var radiusTransparent = 65;
+var radiusBlack = 100;
+
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
@@ -76,6 +79,7 @@ function menuDraw() {
 function startGame() { //prepares the game to start
     clearInterval(menuBackgroundMovement)
     enterClick.play();
+    gameMusic.loop = true;
     gameMusic.play();
     masterVolume.style.display = 'none'
     startButton.style.display = 'none'
@@ -141,11 +145,11 @@ function frame() { // the function will be called every 10 miliseconds forever
     }
 
     //draws the circle around the player if you need this disabled comment the section below
-    var gradient = ctx.createRadialGradient(player.x+10, player.y+10, 50, player.x, player.y, 100);
+    var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
     gradient.addColorStop(0, 'transparent');
     gradient.addColorStop(1, 'black');
     ctx.beginPath();
-    ctx.arc(player.x+10, player.y+10, 1250, 0, 2 * Math.PI);
+    ctx.arc(player.x+15, player.y+15, 1250, 0, 2 * Math.PI);
     ctx.fillStyle = gradient;
     ctx.fill();
 
