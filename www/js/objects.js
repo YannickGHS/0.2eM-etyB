@@ -33,7 +33,7 @@ class Tile extends Sprite{ //core maze graphical and functional component
             case 1: imgPath = "www/img/tilesets/grass.png";
                     _collision = true;
                     break;
-            case 2: imgPath = "www/img/placeholder.png";
+            case 2: imgPath = "www/img/tilesets/portal.png";
                     _collision = false;
                     break;
             default: imgPath = "www/img/placeholder.png";
@@ -68,6 +68,13 @@ class Portal extends Tile{
     portal(){
         player.x = this.newX;
         player.y = this.newY;
+    }
+
+    show(){
+        let img = document.createElement("img");
+        img.src = "www/img/tilesets/grass.png";
+        ctx.drawImage(img, this.x, this.y, this.w, this.h);
+        super.show();
     }
 }
 
