@@ -52,6 +52,7 @@ var imageMovement = -1;
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
+
 function imageLoaded() {
     menuBackgroundMovement //calls the setInterval to start when the image has finally loaded
 }
@@ -137,5 +138,4 @@ function frame() { // the function will be called every 10 miliseconds forever
         player.y = tempY;
     }
     player.show();
-    console.log(tileMap.collisionCheck(player));
 }
