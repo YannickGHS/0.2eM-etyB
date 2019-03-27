@@ -36,10 +36,17 @@ class Tile extends Sprite{ //core maze graphical and functional component
             case 2: imgPath = "www/img/tilesets/portal.png";
                     _collision = false;
                     break;
+            case 3: imgPath = "www/img/placeholder.png";
+                    _collision = false;
+                    break;
+            case 4: imgPath = "www/img/placeholder.png";
+                    _collision = false;
+                    break;
             default: imgPath = "www/img/placeholder.png";
         }
         super(x, y, imgPath);
         this.collision = _collision;
+        this.imgTag = imgTag;
     }
 
     isColliding(other, collision){
@@ -47,6 +54,8 @@ class Tile extends Sprite{ //core maze graphical and functional component
         isColliding = other.x >= this.x && other.x <= this.x + this.w;
         isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
         isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
+        if(this.imgTag == 4 && isColliding)
+            console.log("END");
         return isColliding && collision;
      }
 }
@@ -82,5 +91,28 @@ class Player extends Sprite{//class Player extends Sprite
     constructor(x, y){
         super(x, y, "www/img/placeholder.png");
         
+    }
+}
+
+class Coin extends Tile{
+    constructor(x, y){
+        super(x, y, 3);
+        this.isShowing = true;
+    }
+    isColliding(other, _args){
+        let isColliding = super.isColliding(other, true);
+        if(isColliding && this.isShowing){
+            coins++;
+            this.isShowing = false;
+        }
+    }
+
+    show(){
+        let img = document.createElement("img");
+        img.src = "www/img/tilesets/grass.png";
+        ctx.drawImage(img, this.x, this.y, this.w, this.h);
+        if(this.isShowing){
+            super.show();
+        }
     }
 }

@@ -47,6 +47,8 @@ var menuBackgroundMovement = setInterval(menuDraw, 50); //set a variable for the
 var imageX = 0;
 var imageMovement = -1;
 ///////////////////////////////////////////////////////////////////
+//GAME RELATED VARIABLES
+var coins = 0;
 
 
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
