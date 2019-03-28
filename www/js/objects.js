@@ -89,7 +89,7 @@ class Portal extends Tile{
 
 class Player extends Sprite{//class Player extends Sprite
     constructor(x, y){
-        super(x, y, "www/img/placeholder.png");
+        super(32 * x, 32 * y, "www/img/placeholder.png");
         
     }
 }

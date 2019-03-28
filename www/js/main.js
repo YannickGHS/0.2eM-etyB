@@ -33,7 +33,7 @@ var startButton = document.getElementById('startButton')
 
 var tileMap; //current map displayed
 
-var player = new Player(64, 64);
+var player = new Player(1, 3);
 
 ///////////////////////////////////////////////////////////////////
 //IMAGES
