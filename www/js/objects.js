@@ -27,19 +27,19 @@ class Tile extends Sprite{ //core maze graphical and functional component
         let imgPath;
         let _collision;
         switch(imgTag){
-            case 0: imgPath = "www/img/tilesets/ground.png";
+            case 0: imgPath = "www/img/tilesets/ground.png"; //ground
                     _collision = false;
                     break;
-            case 1: imgPath = "www/img/tilesets/wall.png";
+            case 1: imgPath = "www/img/tilesets/wall.png"; //ealls
                     _collision = true;
                     break;
-            case 2: imgPath = "www/img/tilesets/portal.png";
+            case 2: imgPath = "www/img/tilesets/portal.png"; //portals
                     _collision = false;
                     break;
-            case 3: imgPath = "www/img/placeholder.png";
+            case 3: imgPath = "www/img/placeholder.png"; //coin
                     _collision = false;
                     break;
-            case 4: imgPath = "www/img/placeholder.png";
+            case 4: imgPath = "www/img/tilesets/end.png"; //end
                     _collision = false;
                     break;
             default: imgPath = "www/img/placeholder.png";
@@ -54,8 +54,20 @@ class Tile extends Sprite{ //core maze graphical and functional component
         isColliding = other.x >= this.x && other.x <= this.x + this.w;
         isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
         isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
-        if(this.imgTag == 4 && isColliding)
-            console.log("END");
+        if(this.imgTag == 4 && isColliding){
+                ctx.fillStyle = "#000000";
+                ctx.fillRect(0, 0, 1120, 640);
+                ctx.beginPath();
+            if(currentMap == 3)
+                console.log("END");
+            else{
+                currentMap++;
+                if(currentMap == 2)
+                    loadMap(map2);
+                else
+                    loadMap(map3);
+            }
+        }
         return isColliding && collision;
      }
 }
@@ -81,7 +93,7 @@ class Portal extends Tile{
 
     show(){
         let img = document.createElement("img");
-        img.src = "www/img/tilesets/grass.png";
+        img.src = "www/img/tilesets/ground.png";
         ctx.drawImage(img, this.x, this.y, this.w, this.h);
         super.show();
     }
@@ -114,7 +126,7 @@ class Coin extends Tile{
 
     show(){
         let img = document.createElement("img");
-        img.src = "www/img/tilesets/grass.png";
+        img.src = "www/img/tilesets/ground.png";
         ctx.drawImage(img, this.x, this.y, this.w, this.h);
         if(this.isShowing){
             super.show();

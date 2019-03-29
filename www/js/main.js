@@ -38,6 +38,8 @@ var playerImgX = 0;
 var playerImgY = 0;
 var playerImgFrame = 0;
 
+var currentMap;
+
 ///////////////////////////////////////////////////////////////////
 //IMAGES
 var img = new Image();
@@ -89,7 +91,8 @@ function startGame() { //prepares the game to start
     gameMusic.play();
     masterVolume.style.display = 'none'
     startButton.style.display = 'none'
-    loadMap();
+    currentMap = 1;
+    loadMap(map1);
     setInterval(frame, 10);
 }
 
