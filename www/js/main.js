@@ -58,6 +58,8 @@ var coins = 0;
 var radiusTransparent = 65;
 var radiusBlack = 100;
 
+var countDownDate = Date.now()+60030; // Set the date we're counting down to
+
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
@@ -93,6 +95,25 @@ function startGame() { //prepares the game to start
     startButton.style.display = 'none'
     currentMap = 1;
     loadMap(map1);
+    setInterval(function() { // Update the count down every 1 second
+        var now = new Date().getTime(); // Get todays date and time
+        var distance = countDownDate - now; // Find the distance between now and the count down date
+          
+        // Time calculations for , minutes and seconds
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+          
+        // Output the result in an element with id="demo"
+        //document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+        console.log(minutes + "m" + seconds + "s");
+          
+        // If the count down is over, write some text 
+        if (distance < 0) {
+          clearInterval(x);
+          //document.getElementById("demo").innerHTML = "Game Over!!!!!";
+          console.log("END");
+        }
+      }, 1000);
     setInterval(frame, 10);
 }
 
