@@ -1,0 +1,15 @@
+<html> 
+<body> 
+
+<p id="demo"> </p> 
+ <script> 
+var clock= setInterval (myTimer, 1000) 
+
+function myTimer() { 
+   var d= new Date (); 
+   var time= d.toLocateTimeString(); 
+   document.getElementById ("demo").innerHTML= time; 
+} 
+</script> 
+</body 
+<html>
