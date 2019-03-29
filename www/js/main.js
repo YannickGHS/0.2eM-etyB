@@ -22,7 +22,7 @@ enterClick.volume = 0.1;
 
 var oldSound = slider.value;
 ///////////////////////////////////////////////////////////////////
-//CONTROLS
+//PLAYER & CONTROLS
 
 var upPressed = false;
 var downPressed = false;
@@ -34,6 +34,9 @@ var startButton = document.getElementById('startButton')
 var tileMap; //current map displayed
 
 var player = new Player(1, 3);
+var playerImgX = 0;
+var playerImgY = 0;
+var playerImgFrame = 0;
 
 ///////////////////////////////////////////////////////////////////
 //IMAGES
@@ -50,6 +53,8 @@ var imageMovement = -1;
 //GAME RELATED VARIABLES
 var coins = 0;
 
+var radiusTransparent = 65;
+var radiusBlack = 100;
 
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
@@ -80,6 +85,7 @@ function menuDraw() {
 function startGame() { //prepares the game to start
     clearInterval(menuBackgroundMovement)
     enterClick.play();
+    gameMusic.loop = true;
     gameMusic.play();
     masterVolume.style.display = 'none'
     startButton.style.display = 'none'
@@ -125,19 +131,43 @@ function frame() { // the function will be called every 10 miliseconds forever
     // Checks if the variable before moving player
     if(rightPressed && player.x < canvas.width - 30) {
         player.x = player.x + 2;
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
+        playerImgY = 64;
     }
     if(leftPressed && player.x > 0) {
         player.x = player.x - 2;
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
+        playerImgY = 32;
     }
     if(upPressed && player.y > 0) {
         player.y = player.y - 2;
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
+        playerImgY = 96;
     }
     if(downPressed && player.y < canvas.height - 30) {
         player.y = player.y + 2;
+
+        playerImgFrame = (playerImgFrame + 0.05) % 4; //Goes through numbers 1 - 3
+        playerImgX = Math.floor(playerImgFrame) * 32; //Floors the frame so it is a whole number and multiplies by 32 to find the sprite art position
+
+        playerImgY = 0;
     }
     if(tileMap.collisionCheck(player)){
         player.x = tempX;
         player.y = tempY;
     }
+
+    //draws the circle around the player if you need this disabled comment the section below
+    var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
+    gradient.addColorStop(0, 'transparent');
+    gradient.addColorStop(1, 'black');
+    ctx.beginPath();
+    ctx.arc(player.x+15, player.y+15, 1250, 0, 2 * Math.PI);
+    ctx.fillStyle = gradient;
+    ctx.fill();
+
     player.show();
 }
