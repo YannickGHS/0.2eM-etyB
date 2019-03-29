@@ -22,7 +22,7 @@ enterClick.volume = 0.1;
 
 var oldSound = slider.value;
 ///////////////////////////////////////////////////////////////////
-//CONTROLS
+//PLAYER & CONTROLS
 
 var upPressed = false;
 var downPressed = false;
@@ -34,6 +34,9 @@ var startButton = document.getElementById('startButton')
 var tileMap; //current map displayed
 
 var player = new Player(64, 64);
+var playerImgX = 0;
+var playerImgY = 0;
+var playerImgFrame = 0;
 
 ///////////////////////////////////////////////////////////////////
 //IMAGES
@@ -125,19 +128,29 @@ function frame() { // the function will be called every 10 miliseconds forever
     // Checks if the variable before moving player
     if(rightPressed && player.x < canvas.width - 30) {
         player.x = player.x + 2;
-        player.img.src = "www/img/SpriteR.png"
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
+        playerImgY = 64;
     }
     if(leftPressed && player.x > 0) {
         player.x = player.x - 2;
-        player.img.src = "www/img/SpriteL.png"
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
+        playerImgY = 32;
     }
     if(upPressed && player.y > 0) {
         player.y = player.y - 2;
-        player.img.src = "www/img/SpriteU.png"
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
+        playerImgY = 96;
     }
     if(downPressed && player.y < canvas.height - 30) {
         player.y = player.y + 2;
-        player.img.src = "www/img/SpriteD.png"
+
+        playerImgFrame = (playerImgFrame + 0.05) % 4; //Goes through numbers 1 - 3
+        playerImgX = Math.floor(playerImgFrame) * 32; //Floors the frame so it is a whole number and multiplies by 32 to find the sprite art position
+
+        playerImgY = 0;
     }
     if(tileMap.collisionCheck(player)){
         player.x = tempX;

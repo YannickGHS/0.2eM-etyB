@@ -64,4 +64,9 @@ class Player extends Sprite{//class Player extends Sprite
         super(x, y, "www/img/SpriteR.png");
 
     }
+    show(){
+        let playerImg = document.createElement("img");
+        playerImg.src = "www/img/spritesheet.png";
+        ctx.drawImage(playerImg, playerImgX, playerImgY, 32, 32, this.x, this.y, this.w, this.h);
+    }
 }
