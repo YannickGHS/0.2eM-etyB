@@ -30,7 +30,7 @@ class Tile extends Sprite{ //core maze graphical and functional component
             case 0: imgPath = "www/img/tilesets/ground.png"; //ground
                     _collision = false;
                     break;
-            case 1: imgPath = "www/img/tilesets/wall.png"; //ealls
+            case 1: imgPath = "www/img/tilesets/wall.png"; //walls
                     _collision = true;
                     break;
             case 2: imgPath = "www/img/tilesets/portal.png"; //portals
@@ -54,6 +54,8 @@ class Tile extends Sprite{ //core maze graphical and functional component
         isColliding = other.x >= this.x && other.x <= this.x + this.w;
         isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
         isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
+        isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y >= this.y) && (other.y <= this.y + this.h));
+        isColliding = isColliding || ((other.x >= this.x) && (other.x <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
         if(this.imgTag == 4 && isColliding){
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, 1120, 640);
@@ -79,11 +81,11 @@ class Portal extends Tile{
         this.newY = newY;
     }
 
-    isColliding(other, collision){
+    isColliding(other, _args){
         let isColliding = super.isColliding(other, true);
         if(isColliding)
             this.portal();
-        return collision;
+        return _args;
     }
 
     portal(){
@@ -102,7 +104,6 @@ class Portal extends Tile{
 class Player extends Sprite{//class Player extends Sprite
     constructor(x, y){
         super(32 * x, 32 * y, "www/img/SpriteR.png");
-
     }
     show(){
         let playerImg = document.createElement("img");

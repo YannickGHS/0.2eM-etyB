@@ -6,7 +6,7 @@
  * Description:
  * This file contains all the functionality for the in game map
  */
-var portals = [16, 4, 10, 10, 10, 10]; //enter the values for the portals two for each portal in order of load (depending on the number of col and row)
+var portals = [16, 4, 16, 11, 10, 10]; //enter the values for the portals two for each portal in order of load (depending on the number of col and row)
 var counter = 0; //live it as it is
 var map1 = [ //map 1
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -87,7 +87,7 @@ Array.prototype.collisionCheck = function(player){
     let result = false;
     for(i = 0; i < this.length; i++)
         for(j = 0; j < this[i].length; j++)
-            result = result || this[i][j].isColliding(player, this[i][j].collision);
+						result = result || this[i][j].isColliding(player, this[i][j].collision);
     return result;
 }
 
@@ -97,9 +97,8 @@ function loadMap(temp){
     for(i = 0; i < tileMap.length; i++)
 		for(j = 0; j < tileMap[i].length; j++)
 		if(temp[i][j] == 2){
-			tileMap[i][j] = new Portal(32 * j, 32 * i, 32 * portals[counter], 32 * portals[counter++]);
+			tileMap[i][j] = new Portal(32 * j, 32 * i, 32 * portals[counter], 32 * portals[counter++] - 2);
 			counter++;
-			console.log(counter);
 		}
 		else if(temp[i][j] == 3){
 			tileMap[i][j] = new Coin(32 * j, 32 * i);
