@@ -67,6 +67,8 @@ var radiusBlack = 100;
 
 var timesRun = 1;
 
+var gameFrame;
+
 var countDownDate = Date.now()+720100; // Set the date we're counting down to
 //var countDownDate = Date.now()+5000;
 
@@ -127,7 +129,7 @@ function startGame() { //prepares the game to start
           timer.style.display = 'none'
         }
       }, 1000);
-    var gameFrame = setInterval(frame, 10);
+    gameFrame = setInterval(frame, 10);
 }
 
 function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
@@ -203,13 +205,13 @@ function frame() { // the function will be called every 10 miliseconds forever
     }
 
     //draws the circle around the player if you need this disabled comment the section below
-    var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
-    gradient.addColorStop(0, 'transparent');
-    gradient.addColorStop(1, 'black');
-    ctx.beginPath();
-    ctx.arc(player.x+15, player.y+15, 1250, 0, 2 * Math.PI);
-    ctx.fillStyle = gradient;
-    ctx.fill();
+    //var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
+    //gradient.addColorStop(0, 'transparent');
+    //gradient.addColorStop(1, 'black');
+    //ctx.beginPath();
+    //ctx.arc(player.x+15, player.y+15, 1250, 0, 2 * Math.PI);
+    //ctx.fillStyle = gradient;
+    //ctx.fill();
 
 
     player.show();

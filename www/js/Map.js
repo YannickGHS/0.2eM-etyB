@@ -6,7 +6,7 @@
  * Description:
  * This file contains all the functionality for the in game map
  */
-var portals = [0, 0, 0, 0]; //enter the values for the portals two for each portal in order of load (depending on the number of col and row)
+var portals = [14, 17, 17, 12, 13, 18, 24, 19, 14, 12, 6, 2, 1, 19, 22, 19, 1, 16, 19, 15, 6, 0, 13, 2]; //enter the values for the portals two for each portal in order of load (depending on the number of col and row)
 var counter = 0; //live it as it is
 var map1 = [ //map 1
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -97,8 +97,8 @@ function loadMap(temp){
     for(i = 0; i < tileMap.length; i++)
 		for(j = 0; j < tileMap[i].length; j++)
 		if(temp[i][j] == 2){
-			tileMap[i][j] = new Portal(32 * j, 32 * i, 32 * portals[counter], 32 * portals[counter++] - 2);
-			counter++;
+			tileMap[i][j] = new Portal(32 * j, 32 * i, 32 * portals[counter] + 1, 32 * portals[counter + 1] + 1);
+			counter = counter + 2;
 		}
 		else if(temp[i][j] == 3){
 			tileMap[i][j] = new Coin(32 * j, 32 * i);
