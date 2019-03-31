@@ -39,8 +39,7 @@ var playerImgFrame = 0;
 
 var currentMap;
 
-var gameFrame;
-
+var gameFrame = null;
 ///////////////////////////////////////////////////////////////////
 //IMAGES
 var img = new Image();
@@ -49,9 +48,9 @@ img.src = "www/img/menubackground.png";
 
 var img2 = new Image();
 img2.src = "www/img/menu.png";
-var menuBackgroundMovement = setInterval(menuDraw, 50); //set a variable for the this setInterval for the movement of background so that it can be cleared later
 var imageX = 0;
 var imageMovement = -1;
+var menuBackgroundMovement = null;
 
 var img3 = new Image();
 img3.src = "www/img/Endscreen.png"
@@ -62,20 +61,22 @@ var alpha = 1;
 ///////////////////////////////////////////////////////////////////
 //GAME RELATED VARIABLES
 var coins = 0;
-var radiusTransparent = 65;
+var oldCoins = 0;
+
+var radiusTransparent = 10;
 var radiusBlack = 100;
 
-var countDownDate = Date.now()+60030; // Set the date we're counting down to
+var countDownDate = Date.now()+720100; // Set the date we're counting down to
+//var countDownDate = Date.now()+5000;
 
 document.addEventListener("keydown",keyDownListener,false); //These are listeners where they detect if ANY key is pressed DOWN, if so the keyDownHandler() will be activated
 document.addEventListener("keyup",keyUpListener,false); //These the other listeners where they dectect if ANY key is pressed UP (meaning that the key was let go), if so the keyUpHandler() will be activated
 
-
 function imageLoaded() {
-    menuBackgroundMovement //calls the setInterval to start when the image has finally loaded
+    menuBackgroundMovement = setInterval(menuDraw, 50); //set a variable for the this setInterval for the movement of background so that it can be cleared later
 }
 
-function menuDraw() {
+function menuDraw() { //handles the menu of the game when started
     var volume = 0.1 - (slider.value / 100); //gets value of volume slider
     enterClick.volume = 0.1 - volume;
     gameMusic.volume = 0.1 - volume;
@@ -94,7 +95,7 @@ function menuDraw() {
 }
 
 function startGame() { //prepares the game to start
-    clearInterval(menuBackgroundMovement)
+    clearInterval(menuBackgroundMovement);
     enterClick.play();
     gameMusic.loop = true;
     gameMusic.play();
@@ -102,7 +103,10 @@ function startGame() { //prepares the game to start
     startButton.style.display = 'none'
     currentMap = 1;
     loadMap(map1);
-    setInterval(function() { // Update the count down every 1 second
+    countDownDate = Date.now()+720100;
+    //sets the count down timer for the game and ends the game when the 12 minutes is over
+    var timerCountText = document.getElementById('timer')
+    var timerCountDown = setInterval(function() { // Update the count down every 1 second
         var now = new Date().getTime(); // Get todays date and time
         var distance = countDownDate - now; // Find the distance between now and the count down date
 
@@ -111,18 +115,18 @@ function startGame() { //prepares the game to start
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Output the result in an element with id="demo"
-        //document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
-        console.log(minutes + "m" + seconds + "s");
+        document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
+        //console.log(minutes + "m" + seconds + "s");
 
         // If the count down is over, write some text
         if (distance < 0) {
-          clearInterval(x);
-          //document.getElementById("demo").innerHTML = "Game Over!!!!!";
-          console.log("END");
+          clearInterval(timerCountDown);
+          clearInterval(gameFrame);
+          setInterval(endScreen, 10)
+          timer.style.display = 'none'
         }
       }, 1000);
     gameFrame = setInterval(frame, 10);
-    //setInterval(frame, 10000000);
 }
 
 function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
@@ -191,6 +195,11 @@ function frame() { // the function will be called every 10 miliseconds forever
         player.x = tempX;
         player.y = tempY;
     }
+    if (oldCoins != coins) { //checks if the value of coins has changed then increases radius
+      radiusTransparent += 5
+      radiusBlack += 5
+      oldCoins = coins
+    }
 
     //draws the circle around the player if you need this disabled comment the section below
     var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
@@ -201,7 +210,16 @@ function frame() { // the function will be called every 10 miliseconds forever
     ctx.fillStyle = gradient;
     ctx.fill();
 
+
     player.show();
+    if (alpha >= 0) { //this handles fading out from black into the game
+      ctx.beginPath();
+      ctx.rect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(0, 0, 0, " + alpha +")";
+      ctx.fill();
+      alpha = alpha - 0.02;
+    }
+    console.log(coins)
 }
 
 function endScreen() {
@@ -209,7 +227,7 @@ function endScreen() {
   ctx.drawImage(img4, imageX, 0);
   ctx.drawImage(img3, 0, 0);
 
-  if (alpha >= 0) {
+  if (alpha >= 0) { //this handles fading out from black into the game
     ctx.beginPath();
     ctx.rect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "rgba(0, 0, 0, " + alpha +")";

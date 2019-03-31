@@ -61,9 +61,10 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
-                clearInterval(gameFrame);
-                setInterval(endScreen, 10)
-                //console.log("end")
+              clearInterval(gameFrame);
+              setInterval(endScreen, 10)
+              timer.style.display = 'none'
+              alpha = 1;
             }
             else{
                 currentMap++;
@@ -114,8 +115,8 @@ class Portal extends Tile{
 class Player extends Sprite{//class Player extends Sprite
     constructor(x, y){
         super(32 * x, 32 * y, "www/img/SpriteR.png");
-        this.w = 25;
         this.h = 25;
+        this.w = 25;
     }
     show(){
         let playerImg = document.createElement("img");
