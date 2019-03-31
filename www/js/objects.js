@@ -60,14 +60,24 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
-            if(currentMap == 3)
-                console.log("END");
+            if(currentMap == 3) {
+                clearInterval(gameFrame);
+                setInterval(endScreen, 10)
+                //console.log("end")
+            }
             else{
                 currentMap++;
-                if(currentMap == 2)
+                if(currentMap == 2){
                     loadMap(map2);
-                else
+
+                    console.log("this is level two")
+                }
+                else{
                     loadMap(map3);
+
+                    console.log("this is level three")
+                }
+
             }
         }
         return isColliding && collision;

@@ -10,7 +10,6 @@
 var canvas = document.getElementById("myCanvas"); // Get canvas element from html document
 
 var ctx = canvas.getContext("2d");
-
 ////////////////////////////////////////////////////////////////////
 //SOUND
 var slider = document.getElementById("masterVolume");
@@ -33,7 +32,7 @@ var startButton = document.getElementById('startButton')
 
 var tileMap; //current map displayed
 
-var player = new Player(1, 3);
+var player = new Player(32, 10);
 var playerImgX = 0;
 var playerImgY = 0;
 var playerImgFrame = 0;
@@ -51,10 +50,16 @@ img2.src = "www/img/menu.png";
 var menuBackgroundMovement = setInterval(menuDraw, 50); //set a variable for the this setInterval for the movement of background so that it can be cleared later
 var imageX = 0;
 var imageMovement = -1;
+
+var img3 = new Image();
+img3.src = "www/img/Endscreen.png"
+
+img4 = new Image();
+img4.src = "www/img/endbackground.png"
+var alpha = 1;
 ///////////////////////////////////////////////////////////////////
 //GAME RELATED VARIABLES
 var coins = 0;
-
 var radiusTransparent = 65;
 var radiusBlack = 100;
 
@@ -114,7 +119,8 @@ function startGame() { //prepares the game to start
           console.log("END");
         }
       }, 1000);
-    setInterval(frame, 10);
+    var gameFrame = setInterval(frame, 10);
+    //setInterval(frame, 10000000);
 }
 
 function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
@@ -194,4 +200,24 @@ function frame() { // the function will be called every 10 miliseconds forever
     //ctx.fill();
 
     player.show();
+}
+
+function endScreen() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(img4, imageX, 0);
+  ctx.drawImage(img3, 0, 0);
+
+  if (alpha >= 0) {
+    ctx.beginPath();
+    ctx.rect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(0, 0, 0, " + alpha +")";
+    ctx.fill();
+    alpha = alpha - 0.02;
+  }
+  if (imageX == -1140) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
+    imageMovement = 0.5
+  } else if (imageX == 0) {
+    imageMovement = -0.5
+  }
+  imageX = imageX + imageMovement
 }
