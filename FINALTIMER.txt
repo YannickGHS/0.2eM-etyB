@@ -14,7 +14,7 @@ p {
 <p id="demo"></p>
 
 <script>
-var countDownDate = Date.now()+60030;
+var countDownDate = Date.now()+720030;
 // Update the count down every 1 second
 var x = setInterval(function() {
 
