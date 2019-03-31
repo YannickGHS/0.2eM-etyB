@@ -51,19 +51,26 @@ class Tile extends Sprite{ //core maze graphical and functional component
 
     isColliding(other, collision){
         let isColliding;
-        isColliding = other.x > this.x && other.x < this.x + this.w;
-        isColliding = isColliding && other.y > this.y && other.y < this.y + this.h;
-        isColliding = isColliding || ((other.x + other.w > this.x) && (other.x + other.w < this.x + this.w)) && ((other.y + other.h > this.y) && (other.y + other.h < this.y + this.h));
-        isColliding = isColliding || ((other.x + other.w > this.x) && (other.x + other.w < this.x + this.w)) && ((other.y > this.y) && (other.y < this.y + this.h));
-        isColliding = isColliding || ((other.x > this.x) && (other.x < this.x + this.w)) && ((other.y + other.h > this.y) && (other.y + other.h < this.y + this.h));
+        isColliding = other.x >= this.x && other.x <= this.x + this.w;
+        isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
+        isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
+        isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y >= this.y) && (other.y <= this.y + this.h));
+        isColliding = isColliding || ((other.x >= this.x) && (other.x <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
         if(this.imgTag == 4 && isColliding){
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
+              if (timesRun == 1) {
+                var gameFrame = setInterval(frame, 10);
                 clearInterval(gameFrame);
+                var gameFrame = null;
                 setInterval(endScreen, 10)
-                //console.log("end")
+                timer.style.display = 'none'
+                alpha = 1;
+                timesRun = 0;
+                console.log("blah")
+              }
             }
             else{
                 currentMap++;
@@ -114,8 +121,6 @@ class Portal extends Tile{
 class Player extends Sprite{//class Player extends Sprite
     constructor(x, y){
         super(32 * x, 32 * y, "www/img/SpriteR.png");
-        this.w = 25;
-        this.h = 25;
     }
     show(){
         let playerImg = document.createElement("img");
