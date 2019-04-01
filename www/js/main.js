@@ -39,6 +39,7 @@ var playerImgFrame = 0;
 
 var currentMap;
 
+var gameFrame;
 ///////////////////////////////////////////////////////////////////
 //IMAGES
 var img = new Image();
@@ -64,10 +65,6 @@ var oldCoins = 0;
 
 var radiusTransparent = 10;
 var radiusBlack = 100;
-
-var timesRun = 1;
-
-var gameFrame;
 
 var countDownDate = Date.now()+720100; // Set the date we're counting down to
 //var countDownDate = Date.now()+5000;
