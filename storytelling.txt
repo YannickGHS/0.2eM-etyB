@@ -1,3 +1,4 @@
+  // Felix means happy. 
   var message1= My name is Felix, even though my name means happy, I'm not. 
 
  var message2= Where am I you ask? I am in my head. 
@@ -24,6 +25,7 @@
 
  var message13= Lili would be in math class, and I can't risk her thinking I'm stupid. 
 
+// Achan is a biblical character related to the fall of Jericho.
  var message14= If Mrs. Achan called me up to do a question Lili would surely pay attention.  
 
  var message15= It's quadratics too, I've never been good at that. 
@@ -31,7 +33,8 @@
  var message16= When was I ever good at anything? 
  
  var message17= Actually I was good at baseball. 
-
+ 
+// Jude and Tobias are both biblical names.
  var message18= Three years ago when Jude and Toby were on my team. 
 
  var message19= What a season that was, I'm pretty sure that was the last one.
@@ -44,51 +47,51 @@
  
  var message21= I can get better.
 
- var messages22= If I get out of this maze I can talk to someone...
+ var message22= If I get out of this maze I can talk to someone...
  
-    var messageInterval= setInterval(messages, 7000) 
+    var messageInterval= setInterval(messages, 7000) {
  
-var messageArray= ["message1","message2", "message3", "message4",
+var message= ["message1","message2", "message3", "message4",
  "message5", "message6", "message7", "message8", "message9", 
 "message10", "message11", "message12", "message13", "message14" 
 "message15", "message16", "message17", "message18", "message19" 
 "message20", "message21", "message22"]; 
 
- messages[0]; 
+ message[0]; 
 
-  messages[1]; 
+  message[1]; 
 
-   messages[2]; 
+   message[2]; 
 
-    messages[3]; 
+    message[3]; 
 
-     messages[4]; 
+     message[4]; 
 
-      messages[5]; 
+      message[5]; 
 
-       messages[6];
+       message[6];
  
-        messages[7]; 
+        message[7]; 
 
-         messages[8]; 
+         message[8]; 
 
-          messages[9]; 
+          message[9]; 
 
-           messages[10]; 
+           message[10]; 
 
-            messages[11]; 
+            message[11]; 
 
-             messages[12]; 
+             message[12]; 
 
-              messages[13]; 
+              message[13]; 
 
-               messages[14]; 
+               message[14]; 
 
-                messages[15]; 
+                message[15]; 
 
-                 messages[16]; 
+                 message[16]; 
 
-                  messages [17];
+                  message[17];
                    
                    message[18]; 
                     
@@ -97,6 +100,7 @@ var messageArray= ["message1","message2", "message3", "message4",
                      message[20]; 
                       
                       message [21];
+                  message[counter] 
 
  function messages(){ 
 
@@ -111,6 +115,8 @@ clearinterval(messagesInterval)
 
 }
 
+}
+
                  
  
-
+/Ahhhh why won't this work
