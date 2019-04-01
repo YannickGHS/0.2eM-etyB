@@ -39,6 +39,7 @@ var playerImgFrame = 0;
 
 var currentMap;
 
+var gameFrame;
 ///////////////////////////////////////////////////////////////////
 //IMAGES
 var img = new Image();
@@ -64,8 +65,6 @@ var oldCoins = 0;
 
 var radiusTransparent = 10;
 var radiusBlack = 100;
-
-var timesRun = 1;
 
 var countDownDate = Date.now()+720100; // Set the date we're counting down to
 //var countDownDate = Date.now()+5000;
@@ -127,7 +126,7 @@ function startGame() { //prepares the game to start
           timer.style.display = 'none'
         }
       }, 1000);
-    var gameFrame = setInterval(frame, 10);
+    gameFrame = setInterval(frame, 10);
 }
 
 function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
