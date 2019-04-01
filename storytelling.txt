@@ -36,15 +36,23 @@
 
  var message19= What a season that was, I'm pretty sure that was the last one.
 
- var message18= Don't think about it, it won't happen again. 
+ var message18= Don't think about it, I won't be happy like that again.
+ 
+ var message19=  Actually maybe it can. 
+ 
+ var message20= If I can get out of this maze. 
+ 
+ var message21= I can get better.
 
- var= messages
+ var messages22= If I get out of this maze I can talk to someone...
+ 
     var messageInterval= setInterval(messages, 7000) 
  
 var messageArray= ["message1","message2", "message3", "message4",
  "message5", "message6", "message7", "message8", "message9", 
 "message10", "message11", "message12", "message13", "message14" 
-"message15", "message16", "message17", "message18"]; 
+"message15", "message16", "message17", "message18", "message19" 
+"message20", "message21", "message22"]; 
 
  messages[0]; 
 
@@ -81,6 +89,14 @@ var messageArray= ["message1","message2", "message3", "message4",
                  messages[16]; 
 
                   messages [17];
+                   
+                   message[18]; 
+                    
+                    message[19]; 
+                    
+                     message[20]; 
+                      
+                      message [21];
 
  function messages(){ 
 
