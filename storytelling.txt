@@ -1,0 +1,100 @@
+  var message1= My name is Felix, even though my name means happy, I'm not. 
+
+ var message2= Where am I you ask? I am in my head. 
+
+ var message 3= A maze of my mind. 
+
+ var message4= I'm not crazy, actually maybe, no indefinitely. 
+
+ var message5= See I'm so stupid that I don't even know myself. 
+
+ var message6= I'm so stupid that I'll probably end up being a garbage man or something. 
+
+ var message7= Hey, that fits I am garbage, I'm worthless.  
+
+ var message8= If I'm going to be a garbage man what's the point of going to school. 
+
+ var message9= What time is it? 
+
+ var message10= Oh it's 8:00, whatever I'll just sleep in. 
+
+ var message11= I really don't care if mom yells at me for missing another day of school. 
+
+ var message12= Plus, it's probably better if I don't go. 
+
+ var message13= Lili would be in math class, and I can't risk her thinking I'm stupid. 
+
+ var message14= If Mrs. Achan called me up to do a question Lili would surely pay attention.  
+
+ var message15= It's quadratics too, I've never been good at that. 
+
+ var message16= When was I ever good at anything? 
+ 
+ var message17= Actually I was good at baseball. 
+
+ var message18= Three years ago when Jude and Toby were on my team. 
+
+ var message19= What a season that was, I'm pretty sure that was the last one.
+
+ var message18= Don't think about it, it won't happen again. 
+
+ var= messages
+    var messageInterval= setInterval(messages, 7000) 
+ 
+var messageArray= ["message1","message2", "message3", "message4",
+ "message5", "message6", "message7", "message8", "message9", 
+"message10", "message11", "message12", "message13", "message14" 
+"message15", "message16", "message17", "message18"]; 
+
+ messages[0]; 
+
+  messages[1]; 
+
+   messages[2]; 
+
+    messages[3]; 
+
+     messages[4]; 
+
+      messages[5]; 
+
+       messages[6];
+ 
+        messages[7]; 
+
+         messages[8]; 
+
+          messages[9]; 
+
+           messages[10]; 
+
+            messages[11]; 
+
+             messages[12]; 
+
+              messages[13]; 
+
+               messages[14]; 
+
+                messages[15]; 
+
+                 messages[16]; 
+
+                  messages [17];
+
+ function messages(){ 
+
+     ctx.clearrect(blah); 
+    ctx.beginPath();
+      ctx.font= "30px Arial"; 
+
+  ctx.fillText(messagesArray[counter] 0,0); 
+counter=+1 
+
+clearinterval(messagesInterval) 
+
+}
+
+                 
+ 
+
