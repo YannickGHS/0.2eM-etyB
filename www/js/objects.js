@@ -51,11 +51,11 @@ class Tile extends Sprite{ //core maze graphical and functional component
 
     isColliding(other, collision){
         let isColliding;
-        isColliding = other.x > this.x && other.x < this.x + this.w;
-        isColliding = isColliding && other.y > this.y && other.y < this.y + this.h;
-        isColliding = isColliding || ((other.x + other.w > this.x) && (other.x + other.w < this.x + this.w)) && ((other.y + other.h > this.y) && (other.y + other.h < this.y + this.h));
-        isColliding = isColliding || ((other.x + other.w > this.x) && (other.x + other.w < this.x + this.w)) && ((other.y > this.y) && (other.y < this.y + this.h));
-        isColliding = isColliding || ((other.x > this.x) && (other.x < this.x + this.w)) && ((other.y + other.h > this.y) && (other.y + other.h < this.y + this.h));
+        isColliding = other.x >= this.x && other.x <= this.x + this.w;
+        isColliding = isColliding && other.y >= this.y && other.y <= this.y + this.h;
+        isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
+        isColliding = isColliding || ((other.x + other.w >= this.x) && (other.x + other.w <= this.x + this.w)) && ((other.y >= this.y) && (other.y <= this.y + this.h));
+        isColliding = isColliding || ((other.x >= this.x) && (other.x <= this.x + this.w)) && ((other.y + other.h >= this.y) && (other.y + other.h <= this.y + this.h));
         if(this.imgTag == 4 && isColliding){
                 ctx.fillStyle = "#000000";
                 ctx.fillRect(0, 0, 1120, 640);

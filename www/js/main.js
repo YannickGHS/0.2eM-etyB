@@ -32,14 +32,14 @@ var startButton = document.getElementById('startButton')
 
 var tileMap; //current map displayed
 
-var player = new Player(32, 10);
+var player = new Player(25, 6);
 var playerImgX = 0;
 var playerImgY = 0;
 var playerImgFrame = 0;
 
 var currentMap;
 
-var gameFrame = null;
+var gameFrame;
 ///////////////////////////////////////////////////////////////////
 //IMAGES
 var img = new Image();
@@ -195,7 +195,7 @@ function frame() { // the function will be called every 10 miliseconds forever
         player.x = tempX;
         player.y = tempY;
     }
-    if (oldCoins != coins) { //checks if the value of coins has changed then increases radius
+    if (oldCoins != coins) { //checks if the value of coins has changed then increases radius (temp fix due to coin counter being a bit off)
       radiusTransparent += 5
       radiusBlack += 5
       oldCoins = coins
@@ -219,7 +219,6 @@ function frame() { // the function will be called every 10 miliseconds forever
       ctx.fill();
       alpha = alpha - 0.02;
     }
-    console.log(coins)
 }
 
 function endScreen() {
