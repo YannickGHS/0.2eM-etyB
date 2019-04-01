@@ -61,10 +61,14 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
-              clearInterval(gameFrame);
-              setInterval(endScreen, 10)
-              timer.style.display = 'none'
-              alpha = 1;
+              if (timesRun == 1) {
+                clearInterval(gameFrame);
+                setInterval(endScreen, 10)
+                timer.style.display = 'none'
+                alpha = 1;
+                timesRun = 0;
+                console.log("blah")
+              }
             }
             else{
                 currentMap++;
