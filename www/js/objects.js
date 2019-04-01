@@ -70,12 +70,14 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 currentMap++;
                 if(currentMap == 2){
                     loadMap(map2);
-
+                    player.x = 1 * 32
+                    player.y = 3 * 32
                     console.log("this is level two")
                 }
                 else{
                     loadMap(map3);
-
+                    player.x = 0
+                    player.y = 6 * 32
                     console.log("this is level three")
                 }
 

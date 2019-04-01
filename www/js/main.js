@@ -20,6 +20,7 @@ var enterClick = new Audio('www/sound/enter.wav');
 enterClick.volume = 0.1;
 
 var oldSound = slider.value;
+var volume;
 ///////////////////////////////////////////////////////////////////
 //PLAYER & CONTROLS
 
@@ -32,7 +33,7 @@ var startButton = document.getElementById('startButton')
 
 var tileMap; //current map displayed
 
-var player = new Player(25, 6);
+var player = new Player(1, 3);
 var playerImgX = 0;
 var playerImgY = 0;
 var playerImgFrame = 0;
@@ -77,7 +78,7 @@ function imageLoaded() {
 }
 
 function menuDraw() { //handles the menu of the game when started
-    var volume = 0.1 - (slider.value / 100); //gets value of volume slider
+    volume = (0.1 - (slider.value / 100)); //gets value of volume slider
     enterClick.volume = 0.1 - volume;
     gameMusic.volume = 0.1 - volume;
     if (oldSound != slider.value) { //checks if the value of slider has changed then plays sound
@@ -92,6 +93,7 @@ function menuDraw() { //handles the menu of the game when started
       imageMovement = -0.5
     }
     imageX = imageX + imageMovement
+    //console.log("music = " + gameMusic.volume + " volume = " + volume)
 }
 
 function startGame() { //prepares the game to start
@@ -102,6 +104,7 @@ function startGame() { //prepares the game to start
     masterVolume.style.display = 'none'
     startButton.style.display = 'none'
     currentMap = 1;
+    volume = gameMusic.volume/200
     loadMap(map1);
     countDownDate = Date.now()+720100;
     //sets the count down timer for the game and ends the game when the 12 minutes is over
@@ -166,25 +169,25 @@ function frame() { // the function will be called every 10 miliseconds forever
     tileMap.display();//here a 2D array of Tile objects will be traversed
     // Checks if the variable before moving player
     if(rightPressed && player.x < canvas.width - 30) {
-        player.x = player.x + 2;
+        player.x = player.x + 1;
         playerImgFrame = (playerImgFrame + 0.05) % 4;
         playerImgX = Math.floor(playerImgFrame) * 32;
         playerImgY = 64;
     }
     if(leftPressed && player.x > 0) {
-        player.x = player.x - 2;
+        player.x = player.x - 1;
         playerImgFrame = (playerImgFrame + 0.05) % 4;
         playerImgX = Math.floor(playerImgFrame) * 32;
         playerImgY = 32;
     }
     if(upPressed && player.y > 0) {
-        player.y = player.y - 2;
+        player.y = player.y - 1;
         playerImgFrame = (playerImgFrame + 0.05) % 4;
         playerImgX = Math.floor(playerImgFrame) * 32;
         playerImgY = 96;
     }
     if(downPressed && player.y < canvas.height - 30) {
-        player.y = player.y + 2;
+        player.y = player.y + 1;
 
         playerImgFrame = (playerImgFrame + 0.05) % 4; //Goes through numbers 1 - 3
         playerImgX = Math.floor(playerImgFrame) * 32; //Floors the frame so it is a whole number and multiplies by 32 to find the sprite art position
@@ -202,15 +205,16 @@ function frame() { // the function will be called every 10 miliseconds forever
     }
 
     //draws the circle around the player if you need this disabled comment the section below
-    //var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
-    //gradient.addColorStop(0, 'transparent');
-    //gradient.addColorStop(1, 'black');
-    //ctx.beginPath();
-    //ctx.arc(player.x+15, player.y+15, 1250, 0, 2 * Math.PI);
-    //ctx.fillStyle = gradient;
-    //ctx.fill();
+    var gradient = ctx.createRadialGradient(player.x+15, player.y+15, radiusTransparent, player.x+15, player.y+15, radiusBlack);
+    gradient.addColorStop(0, 'transparent');
+    gradient.addColorStop(1, 'black');
+    ctx.beginPath();
+    ctx.arc(player.x+15, player.y+15, 1250, 0, 2 * Math.PI);
+    ctx.fillStyle = gradient;
+    ctx.fill();
 
-
+    console.log("x=" + player.x/32)
+    console.log("y=" + player.y/32)
     player.show();
     if (alpha >= 0) { //this handles fading out from black into the game
       ctx.beginPath();
@@ -227,11 +231,12 @@ function endScreen() {
   ctx.drawImage(img3, 0, 0);
 
   if (alpha >= 0) { //this handles fading out from black into the game
+    gameMusic.volume = gameMusic.volume - volume;
     ctx.beginPath();
     ctx.rect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "rgba(0, 0, 0, " + alpha +")";
     ctx.fill();
-    alpha = alpha - 0.02;
+    alpha = alpha - 0.005;
   }
   if (imageX == -1140) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
     imageMovement = 0.5
