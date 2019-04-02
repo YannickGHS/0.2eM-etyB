@@ -65,8 +65,13 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
+                endRadius = 0;
+                radiusExpand = 0;
+                endMusic.loop = true;
+                endMusic.play();
                 clearInterval(gameFrame);
-                setInterval(endScreen, 10)
+                clearInterval(messageInterval);
+                setInterval(endScreen, 50);
                 timer.style.display = 'none'
                 alpha = 1;
             }
@@ -74,13 +79,13 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 currentMap++;
                 if(currentMap == 2){
                     loadMap(map2);
-
-                    console.log("this is level two")
+                    player.x = 1 * 32
+                    player.y = 3 * 32
                 }
                 else{
                     loadMap(map3);
-
-                    console.log("this is level three")
+                    player.x = 0 * 32
+                    player.y = 6 * 32
                 }
 
             }
@@ -152,13 +157,13 @@ class Coin extends Tile{
     }
 
     searchForHelp(){
-    bell.play();
-    let gradient = ctx.createRadialGradient(this.x + 15, this.y+15, 20, this.x+15, this.y+15, 30);
-    gradient.addColorStop(0, 'transparent');
-    gradient.addColorStop(1, 'black');
-    ctx.beginPath();
-    ctx.arc(this.x+15, this.y+15, 1250, 0, 2 * Math.PI);
-    ctx.fillStyle = gradient;
-    ctx.fill();
-    }
+        bell.play();
+        let gradient = ctx.createRadialGradient(this.x + 15, this.y+15, 20, this.x+15, this.y+15, 30);
+        gradient.addColorStop(0, 'transparent');
+        gradient.addColorStop(1, 'black');
+        ctx.beginPath();
+        ctx.arc(this.x+15, this.y+15, 1250, 0, 2 * Math.PI);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        }
 }
