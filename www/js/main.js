@@ -12,18 +12,21 @@ var canvas = document.getElementById("myCanvas"); // Get canvas element from htm
 var ctx = canvas.getContext("2d");
 ////////////////////////////////////////////////////////////////////
 //SOUND
+//Handles all sound that happens in game
 var slider = document.getElementById("masterVolume");
 
 var gameMusic = new Audio('www/sound/placeholder_music.mp3');
 gameMusic.volume = 0.1;
 var enterClick = new Audio('www/sound/enter.wav');
 enterClick.volume = 0.1;
+var endMusic = new Audio('www/sound/endscreen_music.mp3')
+endMusic.volume = 0;
 
 var oldSound = slider.value;
 var volume;
 ///////////////////////////////////////////////////////////////////
 //PLAYER & CONTROLS
-
+//Handles with key controllers and functions for the player
 var upPressed = false;
 var downPressed = false;
 var rightPressed = false;
@@ -41,8 +44,19 @@ var playerImgFrame = 0;
 var currentMap;
 
 var gameFrame;
+var messageInterval;
+
+var messageCounter = 0;
+
+var messageArray = ["My name is Felix, even though my name means happy, I'm not.", "Where am I you ask? I am in my head.", "A maze of my mind.", "I'm not crazy, actually maybe, no indefinitely.",
+"God I'm dumb.", "What time is it?", "It's 8:00, whatever I'll just sleep in. I really don't pay attention to school anyway.", "Plus, it's probably better if I don't go.",
+"But, Lili would be in math class, and I can't risk her thinking I'm stupid for missing school. ", "If Mrs. Achan called me up to do a question Lili would surely pay attention.",
+"It's quadratics too, I've never been good at that.", "When was I ever good at anything?", "Well I was sort of good at baseball.",
+"Three years ago when Jude and Toby were on my team, those were good times.", "What a season that was, I'm pretty sure that was the last one.", "Eh, who cares anyway, I haven't seen them for awhile.",
+"I'd love to see them again...", "If I can get out of this maze.", "Maybe I can get better..? If I can get out of here that is...", ""]
 ///////////////////////////////////////////////////////////////////
 //IMAGES
+//Handles with loading in the images that will be used in the game
 var img = new Image();
 img.onload= imageLoaded;
 img.src = "www/img/menubackground.png";
@@ -61,10 +75,11 @@ img4.src = "www/img/endbackground.png"
 var alpha = 1;
 ///////////////////////////////////////////////////////////////////
 //GAME RELATED VARIABLES
-var coins = 0;
-var oldCoins = 0;
+//Handles variables that are used at various parts in the game
+var coins = 0; //Holds the amount of coins the user has collected
+var oldCoins = 0; //Holds the previous value of the coin
 
-var radiusTransparent = 10;
+var radiusTransparent = 10; //Used for the radius around the player
 var radiusBlack = 100;
 
 var countDownDate = Date.now()+720100; // Set the date we're counting down to
@@ -93,7 +108,6 @@ function menuDraw() { //handles the menu of the game when started
       imageMovement = -0.5
     }
     imageX = imageX + imageMovement
-    //console.log("music = " + gameMusic.volume + " volume = " + volume)
 }
 
 function startGame() { //prepares the game to start
@@ -130,6 +144,7 @@ function startGame() { //prepares the game to start
         }
       }, 1000);
     gameFrame = setInterval(frame, 10);
+    messageInterval = setInterval(messagesFunction, 7000)
 }
 
 function keyDownListener(e) { //the (e) variable will allow the parameter to accept events which were set above
@@ -169,28 +184,28 @@ function frame() { // the function will be called every 10 miliseconds forever
     tileMap.display();//here a 2D array of Tile objects will be traversed
     // Checks if the variable before moving player
     if(rightPressed && player.x < canvas.width - 30) {
-        player.x = player.x + 1;
-        playerImgFrame = (playerImgFrame + 0.05) % 4;
-        playerImgX = Math.floor(playerImgFrame) * 32;
+        player.x = player.x + 2;
+        playerImgFrame = (playerImgFrame + 0.05) % 4; //Goes through numbers 1 - 3
+        playerImgX = Math.floor(playerImgFrame) * 32; //Floors the frame so it is a whole number and multiplies by 32 to find the sprite art position
         playerImgY = 64;
     }
     if(leftPressed && player.x > 0) {
-        player.x = player.x - 1;
+        player.x = player.x - 2;
         playerImgFrame = (playerImgFrame + 0.05) % 4;
         playerImgX = Math.floor(playerImgFrame) * 32;
         playerImgY = 32;
     }
     if(upPressed && player.y > 0) {
-        player.y = player.y - 1;
+        player.y = player.y - 2;
         playerImgFrame = (playerImgFrame + 0.05) % 4;
         playerImgX = Math.floor(playerImgFrame) * 32;
         playerImgY = 96;
     }
     if(downPressed && player.y < canvas.height - 30) {
-        player.y = player.y + 1;
+        player.y = player.y + 2;
 
-        playerImgFrame = (playerImgFrame + 0.05) % 4; //Goes through numbers 1 - 3
-        playerImgX = Math.floor(playerImgFrame) * 32; //Floors the frame so it is a whole number and multiplies by 32 to find the sprite art position
+        playerImgFrame = (playerImgFrame + 0.05) % 4;
+        playerImgX = Math.floor(playerImgFrame) * 32;
 
         playerImgY = 0;
     }
@@ -213,9 +228,7 @@ function frame() { // the function will be called every 10 miliseconds forever
     ctx.fillStyle = gradient;
     ctx.fill();
 
-    console.log("x=" + player.x/32)
-    console.log("y=" + player.y/32)
-    player.show();
+    player.show(); //displays the player
     if (alpha >= 0) { //this handles fading out from black into the game
       ctx.beginPath();
       ctx.rect(0, 0, canvas.width, canvas.height);
@@ -223,7 +236,27 @@ function frame() { // the function will be called every 10 miliseconds forever
       ctx.fill();
       alpha = alpha - 0.02;
     }
+    messages(); //displays messages of the character
 }
+
+function messagesFunction () { //This function is mainly used to count everytime it passes 7 seconds as set by a setInterval,
+  if (messageCounter < 19) {
+      messageCounter += 1;
+  }
+  else {
+    clearInterval(messageInterval);
+    messageArray[19] = "";
+  }
+}
+
+function messages () {
+  ctx.beginPath();
+  ctx.font= "25px Arial";
+  ctx.fillStyle = "#adadad";
+  ctx.fill();
+  ctx.fillText(messageArray[messageCounter], 0, 25);
+}
+
 
 function endScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -232,16 +265,20 @@ function endScreen() {
 
   if (alpha >= 0) { //this handles fading out from black into the game
     gameMusic.volume = gameMusic.volume - volume;
+    endMusic.volume = endMusic.volume + volume;
     ctx.beginPath();
     ctx.rect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "rgba(0, 0, 0, " + alpha +")";
     ctx.fill();
     alpha = alpha - 0.005;
   }
-  if (imageX == -1140) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
-    imageMovement = 0.5
-  } else if (imageX == 0) {
-    imageMovement = -0.5
+  if (alpha == 0) {
+    gameMusic.stop;
   }
-  imageX = imageX + imageMovement
+  if (imageX == -1140) { //the image reaches its maximum length when x is -480 or 0, this makes it so that when the image reaches -480 or 0 it will move the other direction
+    imageMovement = 0.5;
+  } else if (imageX == 0) {
+    imageMovement = -0.5;
+  }
+  imageX = imageX + imageMovement;
 }

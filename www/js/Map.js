@@ -6,9 +6,8 @@
  * Description:
  * This file contains all the functionality for the in game map
  */
-//var portals = [18, 11, 10, 5, 1, 2, 3, 4]; //enter the values for the portals two for each portal in order of load (depending on the number of col and row)
 var portals = [14, 17, 17, 12, 13, 18, 24, 19, 14, 12, 6, 2, 1, 19, 22, 19, 1, 16, 19, 15, 8, 0, 13, 2]; //enter the values for the portals two for each portal in order of load (depending on the number of col and row)
-var counter = 0; //live it as it is
+var counter = 0; //leave it as it is
 var map1 = [ //map 1
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],

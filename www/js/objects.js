@@ -61,8 +61,11 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
+                endMusic.loop = true;
+                endMusic.play();
                 clearInterval(gameFrame);
-                setInterval(endScreen, 10)
+                clearInterval(messageInterval);
+                setInterval(endScreen, 50);
                 timer.style.display = 'none'
                 alpha = 1;
             }
@@ -72,13 +75,11 @@ class Tile extends Sprite{ //core maze graphical and functional component
                     loadMap(map2);
                     player.x = 1 * 32
                     player.y = 3 * 32
-                    console.log("this is level two")
                 }
                 else{
                     loadMap(map3);
                     player.x = 0
                     player.y = 6 * 32
-                    console.log("this is level three")
                 }
 
             }
