@@ -103,14 +103,16 @@ function startGame() { //prepares the game to start
     startButton.style.display = 'none'
     currentMap = 1;
     loadMap(map1);
+   
     countDownDate = Date.now()+720100;
+   
     //sets the count down timer for the game and ends the game when the 12 minutes is over
     var timerCountText = document.getElementById('timer')
     var timerCountDown = setInterval(function() { // Update the count down every 1 second
         var now = new Date().getTime(); // Get todays date and time
         var distance = countDownDate - now; // Find the distance between now and the count down date
 
-        // Time calculations for , minutes and seconds
+        // Time calculations for minutes and seconds
         var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
@@ -118,7 +120,7 @@ function startGame() { //prepares the game to start
         document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s ";
         //console.log(minutes + "m" + seconds + "s");
 
-        // If the count down is over, write some text
+        
         if (distance < 0) {
           clearInterval(timerCountDown);
           clearInterval(gameFrame);
