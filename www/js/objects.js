@@ -20,6 +20,10 @@ class Sprite { //base visual element of the game
     show(){
         ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     }
+
+    distance(other){
+        return Math.sqrt(Math.pow(this.x - other.x, 2) + Math.pow(this.y - other.y, 2));
+    }
 }
 
 class Tile extends Sprite{ //core maze graphical and functional component
@@ -36,7 +40,7 @@ class Tile extends Sprite{ //core maze graphical and functional component
             case 2: imgPath = "www/img/tilesets/portal.png"; //portals
                     _collision = false;
                     break;
-            case 3: imgPath = "www/img/tilesets/coin.png"; //coin
+            case 3: imgPath = "www/img/tilesets/heart.png"; //coin
                     _collision = false;
                     break;
             case 4: imgPath = "www/img/tilesets/end.png"; //end
@@ -61,13 +65,8 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
-                endRadius = 0;
-                radiusExpand = 0;
-                endMusic.loop = true;
-                endMusic.play();
                 clearInterval(gameFrame);
-                clearInterval(messageInterval);
-                setInterval(endScreen, 50);
+                setInterval(endScreen, 10)
                 timer.style.display = 'none'
                 alpha = 1;
             }
@@ -75,13 +74,13 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 currentMap++;
                 if(currentMap == 2){
                     loadMap(map2);
-                    player.x = 1 * 32
-                    player.y = 3 * 32
+
+                    console.log("this is level two")
                 }
                 else{
                     loadMap(map3);
-                    player.x = 0 * 32
-                    player.y = 6 * 32
+
+                    console.log("this is level three")
                 }
 
             }
@@ -150,5 +149,16 @@ class Coin extends Tile{
         if(this.isShowing){
             super.show();
         }
+    }
+
+    searchForHelp(){
+    bell.play();
+    let gradient = ctx.createRadialGradient(this.x + 15, this.y+15, 20, this.x+15, this.y+15, 30);
+    gradient.addColorStop(0, 'transparent');
+    gradient.addColorStop(1, 'black');
+    ctx.beginPath();
+    ctx.arc(this.x+15, this.y+15, 1250, 0, 2 * Math.PI);
+    ctx.fillStyle = gradient;
+    ctx.fill();
     }
 }
