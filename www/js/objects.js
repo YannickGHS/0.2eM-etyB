@@ -61,6 +61,8 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 ctx.fillRect(0, 0, 1120, 640);
                 ctx.beginPath();
             if(currentMap == 3) {
+                endRadius = 0;
+                radiusExpand = 0;
                 endMusic.loop = true;
                 endMusic.play();
                 clearInterval(gameFrame);
@@ -78,7 +80,7 @@ class Tile extends Sprite{ //core maze graphical and functional component
                 }
                 else{
                     loadMap(map3);
-                    player.x = 0
+                    player.x = 0 * 32
                     player.y = 6 * 32
                 }
 

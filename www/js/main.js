@@ -82,6 +82,9 @@ var oldCoins = 0; //Holds the previous value of the coin
 var radiusTransparent = 10; //Used for the radius around the player
 var radiusBlack = 100;
 
+var endRadius;
+var radiusExpand;
+
 var countDownDate = Date.now()+720100; // Set the date we're counting down to
 //var countDownDate = Date.now()+5000;
 
@@ -262,6 +265,26 @@ function endScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(img4, imageX, 0);
   ctx.drawImage(img3, 0, 0);
+
+  ctx.beginPath();
+  ctx.arc(535,400,endRadius,0,2*Math.PI,false);
+  ctx.fillStyle = "#4286f4";
+  ctx.fill();
+  if (endRadius == 170) {
+	  radiusExpand = -1.25;
+  }
+	else if (endRadius == 0) {
+	  radiusExpand = 1.25;
+	}
+
+	endRadius = endRadius + radiusExpand
+	ctx.beginPath();
+    ctx.arc(535,400,25,0,2*Math.PI,false);
+	ctx.stroke();
+
+	ctx.beginPath();
+    ctx.arc(535,400,140,0,2*Math.PI,false);
+	ctx.stroke();
 
   if (alpha >= 0) { //this handles fading out from black into the game
     gameMusic.volume = gameMusic.volume - volume;
