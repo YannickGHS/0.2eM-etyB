@@ -155,24 +155,45 @@ function findNearestHelp(){
 				if(map1[i][j] == 3 && counter != index){
 					counter++;
 				}
-				else if(map1[i][j] == 3){
+				else if(map1[i][j] == 3 && tileMap[i][j].isShowing){
 					tileMap[i][j].searchForHelp();
+					counter++
+				}
+				else if(map1[i][j] == 3 && !tileMap[i][j].isShowing){
+					ctx.beginPath();
+        	ctx.rect(0, 0, canvas.width, canvas.height);
+        	ctx.fillStyle = "rgba(0, 0, 0)";
+        	ctx.fill();
 				}
 			}
 			else if(currentMap == 2){
 				if(map2[i][j] == 3 && counter != index){
 					counter++;
 				}
-				else if(mpa1[i][j] == 3){
+				else if(map2[i][j] == 3 && tileMap[i][j].isShowing){
 					tileMap[i][j].searchForHelp();
+					counter++;
+				}
+				else if(map2[i][j] == 3 && !tileMap[i][j].isShowing){
+					ctx.beginPath();
+        	ctx.rect(0, 0, canvas.width, canvas.height);
+        	ctx.fillStyle = "rgba(0, 0, 0)";
+        	ctx.fill();
 				}
 			}
 			else if(currentMap == 3){
-				if(map2[i][j] == 3 && counter != index){
+				if(map3[i][j] == 3 && counter != index){
 					counter++;
 				}
-				else if(mpa1[i][j] == 3){
+				else if(map3[i][j] == 3 && tileMap[i][j].isShowing){
 					tileMap[i][j].searchForHelp();
+					counter++;
+				}
+				else if(map3[i][j] == 3 && !tileMap[i][j].isShowing){
+					ctx.beginPath();
+        	ctx.rect(0, 0, canvas.width, canvas.height);
+        	ctx.fillStyle = "rgba(0, 0, 0)";
+        	ctx.fill();
 				}
 			}
 		}
