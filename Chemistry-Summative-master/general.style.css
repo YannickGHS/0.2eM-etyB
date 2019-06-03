@@ -1,0 +1,30 @@
+#title{
+    size: 50cm;
+    color: dodgerblue;
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#subtitle{
+    font-weight: 100;
+    text-align: center;
+}
+
+nav{
+    size: 8cm;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+article{
+    size: 11cm;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+strong{
+    size: 11cm;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
